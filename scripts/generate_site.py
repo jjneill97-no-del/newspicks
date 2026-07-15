@@ -29,6 +29,9 @@ STATUS_LINES = [
     "Today's picks (dated 2026-07-15) already existed after migration, so per the no-double-slate rule no new picks were generated this run.",
     "NEXT RUN MUST: backfill price_at_rec for HBM/EE/METC/KRMN, price_at_kill for all 15 kills, and refresh current_price for all open "
     "picks, once the finance-data network block is resolved.",
+    "ACTION NEEDED (one-time, manual): this is the first push to a previously-empty repo, so GitHub Pages is not yet enabled and "
+    "https://jjneill97-no-del.github.io/newspicks/ may 404 until you enable it -- Settings -> Pages -> Deploy from branch -> master / (root). "
+    "No available tool in this session can toggle that setting.",
 ]
 
 def load(name):
