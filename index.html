@@ -1,0 +1,423 @@
+<title>Second-Order News Stock Picks &mdash; Paper Trading Tracker</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 900px; margin: 0 auto; padding: 1rem 1rem 4rem; line-height: 1.5;
+    background: #fafafa; color: #1a1a1a;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #16181c; color: #e8e8e8; }
+    .card, table, .status { background: #21242b !important; border-color: #333 !important; }
+    a { color: #7bb0ff; }
+    th { background: #2a2e37 !important; }
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 0.2rem; }
+  h2 { font-size: 1.15rem; border-bottom: 2px solid #ccc; padding-bottom: 0.3rem; margin-top: 2.2rem; }
+  .status { background: #fff3cd; border: 1px solid #e0c56a; border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.9rem; }
+  .status.ok { background: #d9f2e3; border-color: #7ac99a; }
+  .status p { margin: 0.4rem 0; }
+  .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 5px; font-weight: 600; font-size: 0.8rem; }
+  .badge.fail { background: #e0554f; color: white; }
+  .badge.ok { background: #2e9e5b; color: white; }
+  .card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 0.9rem 1rem; margin: 0.8rem 0; }
+  .card.kill { border-left: 4px solid #b9433c; }
+  .tag { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.45rem; border-radius: 10px; background: #e5e5e5; margin-left: 0.3rem; vertical-align: middle; }
+  .tag.high { background: #2e9e5b; color: white; }
+  .tag.med-high { background: #6aa84f; color: white; }
+  .tag.med { background: #e2b93b; }
+  .tag.low { background: #ccc; }
+  .tag.kill-stage { background: #b9433c; color: white; }
+  table { width: 100%; border-collapse: collapse; background: white; font-size: 0.85rem; }
+  th, td { border: 1px solid #ddd; padding: 0.4rem 0.5rem; text-align: left; }
+  th { background: #f0f0f0; position: sticky; top: 0; }
+  .pos { color: #1b7d3b; font-weight: 600; }
+  .neg { color: #c0392b; font-weight: 600; }
+  .pending-row td { color: #888; font-style: italic; }
+  .scroll { overflow-x: auto; }
+  .lb-row { cursor: pointer; }
+  .opens-panel { display: none; background: #f7f7f7; font-size: 0.8rem; padding: 0.5rem; }
+  footer { margin-top: 3rem; font-size: 0.75rem; color: #888; border-top: 1px solid #ccc; padding-top: 1rem; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; }
+  .stat-box { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 0.7rem; text-align: center; }
+  .stat-box .v { font-size: 1.3rem; font-weight: 700; }
+  .stat-box .l { font-size: 0.75rem; color: #777; }
+</style>
+
+<h1>Second-Order News Stock Picks</h1>
+<p style="margin-top:0;color:#666;font-size:0.85rem;">Paper-trading experiment &middot; last run 2026-07-15 08:04 AM EDT</p>
+
+<div class="status ">
+  <span class="badge fail">PARTIAL: PRICE REFRESH FAILED</span>
+  <p>Migration run (one-time): ported 6 open picks + 6 kills from the legacy "Stock News Picks" Google Sheet (dated 2026-07-13), and recovered 4 additional picks + 9 additional kills (dated 2026-07-15) from a Gmail draft that never made it into the sheet (the sheet's ODS write pipeline was broken). Drive is not touched again going forward -- git is now the single source of truth.</p><p>LIVE PRICE REFRESH FAILED THIS RUN: yfinance (Yahoo Finance backend), a direct stooq.com CSV pull, and WebFetch attempts against Yahoo Finance / stooq / Google Finance quote pages all returned HTTP 403 at the network egress proxy -- confirmed via the proxy's own status endpoint as a policy-level CONNECT rejection to finance-data hosts (fc.yahoo.com etc.), not a transient error. Five independent attempts across two access paths were made; per the no-more-than-two-retries rule, further retries were not attempted.</p><p>Because of the above: the 6 migrated picks (FRO, CF, CAMT, LEU, POWL, KTOS) show current_price values carried over unchanged from the legacy sheet's last live snapshot (dated 2026-07-14) -- real recorded data, not fabricated, but NOT refreshed today. The 4 new picks (HBM, EE, METC, KRMN) and all 15 kills have no price data at all yet (price_at_rec / price_at_kill pending) since they were never priced before this outage. No numbers were invented anywhere on this page.</p><p>Today's picks (dated 2026-07-15) already existed after migration, so per the no-double-slate rule no new picks were generated this run.</p><p>NEXT RUN MUST: backfill price_at_rec for HBM/EE/METC/KRMN, price_at_kill for all 15 kills, and refresh current_price for all open picks, once the finance-data network block is resolved.</p>
+</div>
+
+<h2>Today's Picks &mdash; 2026-07-15</h2>
+
+    <div class="card">
+      <h3>HBM &mdash; Hudbay Minerals Inc. <span class="tag med-high">Med-High</span> <span class="tag cat">supply-chain</span></h3>
+      <p><strong>News:</strong> China halted sulfuric-acid exports to Chile (fully cut off by May 2026), the key input for Chile's copper heap-leach operations, compounding a global sulfur bottleneck traced to the Iran war. Chile copper output fell 9.04% YoY in March 2026 (Codelco -10%, BHP Escondida -15.75%, Collahuasi -10.8%). Morgan Stanley forecasts a 600,000-tonne 2026 refined copper deficit -- the largest in 20+ years.</p>
+      <p><strong>Pick:</strong> Mid-cap copper/gold/zinc miner (Peru, Manitoba, Arizona) with no material Chile heap-leach/sulfuric-acid exposure.</p>
+      <p><strong>Why it benefits:</strong> This is a chemical-input failure, not an ore-grade problem, so it disproportionately hits Chile-concentrated leach producers while sparing concentrate/flotation producers elsewhere. As the deficit widens, non-Chile supply gains relative pricing power. Second-order: not "copper price up" but "a Chile-specific input-chain failure reallocates market share/margin to non-Chile producers."</p>
+      <p><strong>Hold period:</strong> 2-6 months &nbsp; <strong>Exit plan:</strong> Trim 1/3 at +15%, 1/3 at +30%; exit remainder if Chinese sulfuric-acid exports to Chile resume, or -15% stop.</p>
+      <p><a href="https://www.mining.com/web/copper-king-chile-faces-acid-supply-crunch-as-china-exports-dry-up/" target="_blank" rel="noopener">Source</a> &middot; Price at rec: pending (pending market open)</p>
+    </div>
+    <div class="card">
+      <h3>EE &mdash; Excelerate Energy, Inc. <span class="tag med-high">Med-High</span> <span class="tag cat">supply-chain</span></h3>
+      <p><strong>News:</strong> QatarEnergy invoked force majeure on LNG shipments; Iranian strikes damaged ~17% of Qatar's Ras Laffan export capacity with a 3-5 year repair timeline. Renewed strikes this week reignited transit fears; European gas prices jumped ~5% on Jul 13. Europe is racing to refill storage before winter, with the US now supplying 63% of EU LNG imports (up from 57%).</p>
+      <p><strong>Pick:</strong> FSRU (floating storage regasification unit) operator expanding European LNG import/regas capacity (Germany-Wilhelmshaven, Italy-Ravenna; ~6 new/expanded EU terminals forecast for 2026).</p>
+      <p><strong>Why it benefits:</strong> Qatar's multi-year capacity loss plus persistent Hormuz risk means Europe must lock in MORE import/regas capacity to receive LNG from alternative sources -- an infrastructure bottleneck distinct from the tanker freight-rate story already used for crude (FRO). Excelerate's floating terminals deploy faster than fixed onshore plants, capturing the urgency premium.</p>
+      <p><strong>Hold period:</strong> 2-5 months &nbsp; <strong>Exit plan:</strong> Trim 1/3 at +18%, 1/3 at +35%; exit remainder on confirmed Ras Laffan capacity restoration, or -15% stop.</p>
+      <p><a href="https://ieefa.org/european-lng-tracker" target="_blank" rel="noopener">Source</a> &middot; Price at rec: pending (pending market open)</p>
+    </div>
+    <div class="card">
+      <h3>METC &mdash; Ramaco Resources, Inc. <span class="tag med">Med</span> <span class="tag cat">regulatory</span></h3>
+      <p><strong>News:</strong> Brook Mine (Ranchester, WY) officially opened Jul 11 -- the first new US rare earth mine in 70+ years, DOE/NETL-backed, ~1.7M tons of rare earth oxides from unconventional coal-associated clay that avoids costly hard-rock processing. G7 leaders agreed to cut reliance on any single non-G7 rare-earth supplier below 60% by 2030; China broadened export controls on US/Japanese entities this month.</p>
+      <p><strong>Pick:</strong> US metallurgical coal producer whose Brook Mine subsidiary is developing the newly-opened Wyoming rare-earth project.</p>
+      <p><strong>Why it benefits:</strong> G7 diversification targets and tightening Chinese controls create policy-level urgency and funding support for non-China rare-earth supply. Ramaco's unconventional, low-radioactivity clay deposit sidesteps the capital intensity that kills most hard-rock rare-earth projects -- differentiated from the already-crowded MP Materials/Lynas trade. CAVEAT (why only Medium, not High): core coal segment posted a Q1 2026 net loss and negative adjusted EBITDA, and the rare-earth project is still pilot/PEA-stage -- a longer-dated call option, not near-term revenue.</p>
+      <p><strong>Hold period:</strong> 3-9 months &nbsp; <strong>Exit plan:</strong> Trim 1/3 at +20%, 1/3 at +40%; exit remainder on DOE funding withdrawal/negative PEA update, or -18% stop (wider given coal-segment volatility).</p>
+      <p><a href="https://rareearthexchanges.com/news/brook-mine-to-become-first-new-u-s-rare-earth-project-in-70-years-wyoming-reclaims-strategic-spotlight/" target="_blank" rel="noopener">Source</a> &middot; Price at rec: pending (pending market open)</p>
+    </div>
+    <div class="card">
+      <h3>KRMN &mdash; Karman Holdings Inc. <span class="tag med-high">Med-High</span> <span class="tag cat">geopolitical</span></h3>
+      <p><strong>News:</strong> Pentagon aims to more than triple annual Patriot PAC-3 production (600 to 2,000/year); $9.0B Saudi Patriot sale and ~$5B Qatar Patriot/APKWS restock already approved; batteries redeployed from South Korea/Germany to the Middle East. This week's Iran strikes plus Houthi/Iran attacks on Jordan, Saudi Arabia and Kuwait underscore the demand driver.</p>
+      <p><strong>Pick:</strong> Aerospace/defense subsystem supplier (payload protection/deployment, aerostructures, propulsion/interstage systems) for hypersonics, strategic missile defense and tactical missile programs -- not a named prime.</p>
+      <p><strong>Why it benefits:</strong> The Patriot/missile-defense surge is a manufacturing-capacity story as much as a demand story; the physical bottleneck runs through sub-tier structural/propulsion suppliers who fulfill the expanded build rate across MULTIPLE missile programs. Karman's active pipeline grew to ~$3B (from ~$1B a year ago) with revenue +51% YoY. NOTE: shares a sector (defense) with existing open pick KTOS -- different specific program driver (Patriot/missile-defense production ramp vs. NATO/European rearmament), flagged as a concentration risk.</p>
+      <p><strong>Hold period:</strong> 2-6 months &nbsp; <strong>Exit plan:</strong> Trim 1/3 at +20%, 1/3 at +40%; exit remainder on Patriot funding cut/CR stall, or -15% stop.</p>
+      <p><a href="https://www.stripes.com/theaters/us/2026-04-02/boeing-patriot-missile-production-21258911.html" target="_blank" rel="noopener">Source</a> &middot; Price at rec: pending (pending market open)</p>
+    </div>
+
+<h2>Considered and Rejected Today</h2>
+
+    <div class="card kill">
+      <h4>GTLS &mdash; Chart Industries <span class="tag kill-stage">unverifiable</span></h4>
+      <p><strong>Story:</strong> LNG-Europe equipment demand -- same trigger considered for EE (Excelerate Energy).</p>
+      <p><strong>Why killed:</strong> Being acquired by Baker Hughes ($13.6B deal, EU approval already secured); the stock is pinned to deal-arb spread, not free to trade the underlying thesis.</p>
+    </div>
+    <div class="card kill">
+      <h4>ERII &mdash; Energy Recovery Inc <span class="tag kill-stage">just-so-story</span></h4>
+      <p><strong>Story:</strong> Western US drought driving desalination capex.</p>
+      <p><strong>Why killed:</strong> Company just withdrew its FY26 desalination guidance explicitly because the Iran conflict is hurting its Middle East business -- the news is net negative for the stock, not a clean beneficiary of the story.</p>
+    </div>
+    <div class="card kill">
+      <h4>CB &mdash; Chubb Limited <span class="tag kill-stage">just-so-story</span></h4>
+      <p><strong>Story:</strong> Leads new Lloyd's Hormuz war-risk insurance consortium and a $40B DFC facility.</p>
+      <p><strong>Why killed:</strong> Real news, but marine war-risk premium income is a rounding error against a ~$110B diversified insurer -- immaterial to the stock.</p>
+    </div>
+    <div class="card kill">
+      <h4>BE &mdash; Bloom Energy <span class="tag kill-stage">priced-in</span></h4>
+      <p><strong>Story:</strong> Data-center behind-the-meter power demand (VA consumption tax, White House AI power-cost event).</p>
+      <p><strong>Why killed:</strong> Already booked $7.65B in data-center deals in the past 90 days plus a $25B Brookfield deal (5x upsized Jun 30). This is now the consensus AI-power name, not an overlooked second-order play.</p>
+    </div>
+    <div class="card kill">
+      <h4>AVAV &mdash; AeroVironment <span class="tag kill-stage">priced-in</span></h4>
+      <p><strong>Story:</strong> Gulf drone-attack proliferation (Kuwait, Jordan, Saudi Arabia) driving counter-drone demand.</p>
+      <p><strong>Why killed:</strong> The $500M Army contract was announced Jul 1-2, nearly two weeks before this sweep window -- already digested by the market.</p>
+    </div>
+    <div class="card kill">
+      <h4>APD &mdash; Air Products and Chemicals <span class="tag kill-stage">priced-in</span></h4>
+      <p><strong>Story:</strong> Qatar/China helium supply crisis threatening chip-fab (HBM/DRAM) production.</p>
+      <p><strong>Why killed:</strong> JPMorgan and Wells Fargo already issued upgrades citing this exposure; helium is a small slice of a ~$70B diversified industrial-gas major.</p>
+    </div>
+    <div class="card kill">
+      <h4>LNN &mdash; Lindsay Corp <span class="tag kill-stage">just-so-story</span></h4>
+      <p><strong>Story:</strong> Western US drought driving irrigation-equipment capex.</p>
+      <p><strong>Why killed:</strong> Management's own Q3 FY26 earnings call said the opposite -- irrigation demand is soft despite severe drought, because weak farm economics and high input costs dominate. Plausible story, contradicted by the company's own disclosure.</p>
+    </div>
+    <div class="card kill">
+      <h4>NEHC &mdash; New Era Helium <span class="tag kill-stage">unverifiable</span></h4>
+      <p><strong>Story:</strong> Domestic helium supply diversification.</p>
+      <p><strong>Why killed:</strong> Rebranded to New Era Energy &amp; Digital (ticker NUAI) in Aug 2025, pivoting to AI/data-center infrastructure. No longer a clean helium proxy.</p>
+    </div>
+    <div class="card kill">
+      <h4>RDUS &mdash; Radius Recycling <span class="tag kill-stage">unverifiable</span></h4>
+      <p><strong>Story:</strong> Copper-scrap economics improving as the refined-copper deficit widens.</p>
+      <p><strong>Why killed:</strong> Acquired by Toyota Tsusho America and delisted from Nasdaq in July 2025. Not tradable.</p>
+    </div>
+
+<h2>Open Picks Leaderboard</h2>
+<p style="font-size:0.85rem;color:#666;">Tap/click a row to expand its daily-open price history.</p>
+<div class="scroll">
+<table>
+  <thead><tr><th>Ticker</th><th>Date</th><th>Price@Rec</th><th>Current</th><th>Gain/Loss</th><th>vs SPY</th><th>vs Sector</th><th>Hold Period</th><th>Status</th></tr></thead>
+  <tbody>
+  
+      <tr class="lb-row" data-opens='{"2026-07-13": 137.5}' data-ticker="CAMT">
+        <td>CAMT</td>
+        <td>2026-07-13</td>
+        <td>$137.50</td>
+        <td>$149.90</td>
+        <td class="pos">+9.02%</td>
+        <td class="pos">+9.10%</td>
+        <td class="pos">+8.25%</td>
+        <td>1-4 months</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row" data-opens='{"2026-07-13": 48.48}' data-ticker="KTOS">
+        <td>KTOS</td>
+        <td>2026-07-13</td>
+        <td>$48.48</td>
+        <td>$50.36</td>
+        <td class="pos">+3.88%</td>
+        <td class="pos">+3.96%</td>
+        <td class="pos">+5.34%</td>
+        <td>1-4 months</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row" data-opens='{"2026-07-13": 225.94}' data-ticker="POWL">
+        <td>POWL</td>
+        <td>2026-07-13</td>
+        <td>$225.94</td>
+        <td>$234.25</td>
+        <td class="pos">+3.68%</td>
+        <td class="pos">+3.76%</td>
+        <td class="pos">+4.27%</td>
+        <td>1-5 months</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row" data-opens='{"2026-07-13": 118.82}' data-ticker="CF">
+        <td>CF</td>
+        <td>2026-07-13</td>
+        <td>$118.82</td>
+        <td>$119.19</td>
+        <td class="pos">+0.31%</td>
+        <td class="pos">+0.40%</td>
+        <td class="neg">-0.28%</td>
+        <td>4-12 weeks</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row" data-opens='{"2026-07-13": 38.91}' data-ticker="FRO">
+        <td>FRO</td>
+        <td>2026-07-13</td>
+        <td>$38.91</td>
+        <td>$38.38</td>
+        <td class="neg">-1.36%</td>
+        <td class="neg">-1.28%</td>
+        <td class="neg">-4.37%</td>
+        <td>2-8 weeks (event-driven)</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row" data-opens='{"2026-07-13": 167}' data-ticker="LEU">
+        <td>LEU</td>
+        <td>2026-07-13</td>
+        <td>$167.00</td>
+        <td>$159.38</td>
+        <td class="neg">-4.56%</td>
+        <td class="neg">-4.48%</td>
+        <td class="neg">-3.49%</td>
+        <td>1-4 months</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row pending-row">
+        <td>HBM</td>
+        <td>2026-07-15</td>
+        <td colspan="6">price pending -- market not yet open at time of recommendation, backfilling next run</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row pending-row">
+        <td>EE</td>
+        <td>2026-07-15</td>
+        <td colspan="6">price pending -- market not yet open at time of recommendation, backfilling next run</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row pending-row">
+        <td>METC</td>
+        <td>2026-07-15</td>
+        <td colspan="6">price pending -- market not yet open at time of recommendation, backfilling next run</td>
+        <td>open</td>
+      </tr>
+      <tr class="lb-row pending-row">
+        <td>KRMN</td>
+        <td>2026-07-15</td>
+        <td colspan="6">price pending -- market not yet open at time of recommendation, backfilling next run</td>
+        <td>open</td>
+      </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Portfolio Summary</h2>
+<div class="stat-grid">
+  <div class="stat-box"><div class="v">6</div><div class="l">priced positions ($1,000 each)</div></div>
+  <div class="stat-box"><div class="v">$6,000.00</div><div class="l">hypothetical invested</div></div>
+  <div class="stat-box"><div class="v">$6,109.60</div><div class="l">current value</div></div>
+  <div class="stat-box"><div class="v">+1.83%</div><div class="l">aggregate return</div></div>
+  <div class="stat-box"><div class="v">4</div><div class="l">pending entry price</div></div>
+</div>
+<div class="scroll" style="margin-top:1rem;">
+<table>
+  <thead><tr><th>Category</th><th>Count</th><th>Avg return</th></tr></thead>
+  <tbody><tr><td>geopolitical</td><td>2</td><td>+1.26%</td></tr><tr><td>regulatory</td><td>1</td><td>-4.56%</td></tr><tr><td>supply-chain</td><td>2</td><td>+1.99%</td></tr><tr><td>trend</td><td>1</td><td>+9.02%</td></tr></tbody>
+</table>
+</div>
+<div class="scroll" style="margin-top:1rem;">
+<table>
+  <thead><tr><th>Confidence</th><th>Count</th><th>Avg return</th></tr></thead>
+  <tbody><tr><td>Med</td><td>4</td><td>+1.74%</td></tr><tr><td>Med-High</td><td>2</td><td>+1.99%</td></tr></tbody>
+</table>
+</div>
+
+<h2>Kills / Counterfactuals</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Ticker</th><th>Date</th><th>Kill Stage</th><th>Price@Kill</th><th>Current</th><th>Would-be Return</th></tr></thead>
+  <tbody>
+      <tr>
+        <td>XOM</td>
+        <td>2026-07-13</td>
+        <td>first-order</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>CCJ</td>
+        <td>2026-07-13</td>
+        <td>priced-in</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>LMT</td>
+        <td>2026-07-13</td>
+        <td>first-order</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>MU</td>
+        <td>2026-07-13</td>
+        <td>first-order</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>GEV</td>
+        <td>2026-07-13</td>
+        <td>priced-in</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>NTR</td>
+        <td>2026-07-13</td>
+        <td>first-order</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>GTLS</td>
+        <td>2026-07-15</td>
+        <td>unverifiable</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>ERII</td>
+        <td>2026-07-15</td>
+        <td>just-so-story</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>CB</td>
+        <td>2026-07-15</td>
+        <td>just-so-story</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>BE</td>
+        <td>2026-07-15</td>
+        <td>priced-in</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>AVAV</td>
+        <td>2026-07-15</td>
+        <td>priced-in</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>APD</td>
+        <td>2026-07-15</td>
+        <td>priced-in</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>LNN</td>
+        <td>2026-07-15</td>
+        <td>just-so-story</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>NEHC</td>
+        <td>2026-07-15</td>
+        <td>unverifiable</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr>
+      <tr>
+        <td>RDUS</td>
+        <td>2026-07-15</td>
+        <td>unverifiable</td>
+        <td>pending</td>
+        <td>pending</td>
+        <td>pending</td>
+      </tr></tbody>
+</table>
+</div>
+<p style="font-size:0.85rem;color:#666;">Survivors vs Killed: 6 priced open picks averaging +1.83% vs 0 priced kills (would-be returns pending price backfill).</p>
+
+<h2>Stats</h2>
+<div class="stat-grid">
+  <div class="stat-box"><div class="v">+66.67%</div><div class="l">hit rate (open picks, interim)</div></div>
+  <div class="stat-box"><div class="v">+1.99%</div><div class="l">median return</div></div>
+  <div class="stat-box"><div class="v">+4.22%</div><div class="l">avg win</div></div>
+  <div class="stat-box"><div class="v">-2.96%</div><div class="l">avg loss</div></div>
+</div>
+<p style="font-size:0.8rem;color:#888;">No picks have closed their 60-trading-day window yet, so hit rate above reflects only currently-open unrealized positions, not resolved outcomes.</p>
+
+<footer>
+  Paper-trading experiment tracking whether second-order news reasoning generates alpha. Not investment advice.
+  Data: <a href="data/picks.json">picks.json</a> &middot; <a href="data/kills.json">kills.json</a>
+</footer>
+
+<script>
+  var EMBEDDED_DATA = {"picks": [{"date_recommended": "2026-07-13", "ticker": "FRO", "company": "Frontline plc", "news_overview": "Iran escalated Strait of Hormuz attacks Jul 7-10 (LNG tanker Al Rekayat and supertanker Wedyan struck; 3 ships hit in 24h), unraveling the June MOU; Hormuz traffic largely blocked since Feb 2026; crude-tanker war-risk surcharges jumped 25%->37%.", "pick_overview": "Large-cap pure VLCC crude-tanker owner; spot day-rates spike on rerouting, reduced effective fleet supply and war-risk premia.", "rationale": "Contested Hormuz forces ton-mile expansion (longer routes) and strands tonnage, tightening the global crude tanker market; Frontline's VLCC fleet earns directly off spot TCE spikes. Second-order beneficiary of the geopolitical shock, not the oil price itself.", "source_url": "https://www.aljazeera.com/news/2026/7/7/ships-attacked-in-the-strait-of-hormuz-what-that-means-for-ongoing-talks", "confidence": "Med", "category": "geopolitical", "target_hold_period": "2-8 weeks (event-driven)", "exit_plan": "Trim 1/3 at +15%, 1/3 at +30%; exit remainder on Hormuz de-escalation/ceasefire headline or -12% stop.", "price_at_rec": 38.91, "spy_at_rec": 752.47, "sector_etf": "BOAT", "sector_etf_at_rec": 40.6, "current_price": 38.38, "current_price_asof": "2026-07-14", "daily_opens": {"2026-07-13": 38.91}, "gain_loss_pct": -1.362117708, "vs_spy_pct": -1.277064483, "vs_sector_pct": -4.367043816, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-13", "ticker": "CF", "company": "CF Industries Holdings", "news_overview": "USDA Jul 10 crop report: smallest US wheat harvest since 1972 (HRW smallest since 1957/58) from Plains drought; corn stressed in pollination; Hormuz closure spiking global natural gas and fertilizer costs.", "pick_overview": "US Gulf-Coast nitrogen (ammonia/urea/UAN) producer running on cheap Henry Hub gas.", "rationale": "Global gas spike from Hormuz lifts world urea/ammonia prices (much global N uses expensive imported gas) while CF's feedstock is cheap US gas, widening margins; drought keeps N demand firm for corn. Second-order: a foreign energy shock benefits CF via feedstock arbitrage, not merely 'fertilizer price up'.", "source_url": "https://www.agweb.com/news/usda-projects-smallest-us-wheat-harvest-1972-due-plains-drought", "confidence": "Med-High", "category": "supply-chain", "target_hold_period": "4-12 weeks", "exit_plan": "Trim 1/3 at +12%, 1/3 at +25%; exit if Henry Hub spikes above ~$5.50 erasing the spread or -12% stop.", "price_at_rec": 118.82, "spy_at_rec": 752.47, "sector_etf": "MOO", "sector_etf_at_rec": 81.03, "current_price": 119.19, "current_price_asof": "2026-07-14", "daily_opens": {"2026-07-13": 118.82}, "gain_loss_pct": 0.311395388, "vs_spy_pct": 0.3964486127, "vs_sector_pct": -0.2809778071, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-13", "ticker": "CAMT", "company": "Camtek Ltd", "news_overview": "SK Hynix's record $26.5B Nasdaq debut (Jul 10, +13%); NVIDIA-SK hynix multiyear HBM memory partnership; Samsung/SK $1T Korea semis/AI investment; Korean team demos stacking 10+ ultrathin chips (advanced packaging).", "pick_overview": "Advanced-packaging inspection & metrology equipment maker levered to HBM/3D stacking.", "rationale": "HBM and 3D/hybrid-bond stacking multiply inspection/metrology steps per wafer; capex flows to packaging tools, not just memory makers. Camtek is a focused second-order supplier riding HBM unit growth without single-customer memory-price risk.", "source_url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-july-10-212505206.html", "confidence": "Med", "category": "trend", "target_hold_period": "1-4 months", "exit_plan": "Trim 1/3 at +15%, 1/3 at +30%; exit on HBM capex guidance cut or -15% stop.", "price_at_rec": 137.5, "spy_at_rec": 752.47, "sector_etf": "SOXX", "sector_etf_at_rec": 563.58, "current_price": 149.9, "current_price_asof": "2026-07-14", "daily_opens": {"2026-07-13": 137.5}, "gain_loss_pct": 9.018181818, "vs_spy_pct": 9.103235043, "vs_sector_pct": 8.24810481, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-13", "ticker": "LEU", "company": "Centrus Energy Corp", "news_overview": "~15 reactors (~12 GW) online globally in 2026; uranium seen breaching $70/lb; record US power demand; energy-security push to reshore enrichment; nuclear generation growth accelerating.", "pick_overview": "Only US-owned uranium enrichment company; HALEU producer for advanced/SMR reactors under DOE contracts.", "rationale": "The nuclear-buildout bottleneck is enrichment (still dominated by Russia's Tenex), not just mined uranium; security-driven reshoring routes funding and offtake to domestic enrichment. Second-order pick vs crowded uranium miners.", "source_url": "https://www.iea.org/reports/electricity-2026/executive-summary", "confidence": "Med", "category": "regulatory", "target_hold_period": "1-4 months", "exit_plan": "Trim 1/3 at +20%, 1/3 at +40%; exit on loss of DOE HALEU funding/contracts or -15% stop.", "price_at_rec": 167, "spy_at_rec": 752.47, "sector_etf": "URA", "sector_etf_at_rec": 42, "current_price": 159.38, "current_price_asof": "2026-07-14", "daily_opens": {"2026-07-13": 167}, "gain_loss_pct": -4.562874251, "vs_spy_pct": -4.477821027, "vs_sector_pct": -3.49144568, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-13", "ticker": "POWL", "company": "Powell Industries", "news_overview": "EIA sees record US power demand in 2026 & 2027; AI data-center buildout bottlenecked by 'electricity, copper and critical gases'; grid equipment granted 15% tariff protection through 2027 to speed domestic buildout.", "pick_overview": "Maker of custom electrical switchgear, distribution & control systems for data centers, LNG, grid and industrial power.", "rationale": "Every data center, LNG train and grid expansion needs medium-voltage switchgear with long lead times and pricing power. Smaller-cap second-order beneficiary of the AI-power theme, less crowded than turbines/utilities.", "source_url": "https://www.technology.org/2026/07/08/us-power-demand-record-2026-2027-eia/", "confidence": "Med-High", "category": "supply-chain", "target_hold_period": "1-5 months", "exit_plan": "Trim 1/3 at +15%, 1/3 at +30%; exit on backlog/book-to-bill rollover or -15% stop.", "price_at_rec": 225.94, "spy_at_rec": 752.47, "sector_etf": "XLI", "sector_etf_at_rec": 181.52, "current_price": 234.25, "current_price_asof": "2026-07-14", "daily_opens": {"2026-07-13": 225.94}, "gain_loss_pct": 3.677967602, "vs_spy_pct": 3.763020827, "vs_sector_pct": 4.267434327, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-13", "ticker": "KTOS", "company": "Kratos Defense & Security", "news_overview": "NATO Ankara summit (Jul 6-7): tens of billions in new deals; European allies +20% defense spend; multinational buys (Triton drones, GlobalEye, A330 MRTT); 5 allies to hit 3.5% GDP core-defense guideline in 2026.", "pick_overview": "Mid-cap defense supplier in unmanned systems, target drones, hypersonics and propulsion/subsystems.", "rationale": "Broad Western rearmament lifts sub-tier suppliers of drones/munitions-enablers/propulsion faster than saturated primes. Kratos is a second-order, higher-beta beneficiary (affordable mass, attritable drones) rather than the named prime contracts.", "source_url": "https://www.cnbc.com/2026/07/06/nato-summit-turkey-us-trump-defense-spending.html", "confidence": "Med", "category": "geopolitical", "target_hold_period": "1-4 months", "exit_plan": "Trim 1/3 at +20%, 1/3 at +40%; exit on continuing-resolution/budget stall or -15% stop.", "price_at_rec": 48.48, "spy_at_rec": 752.47, "sector_etf": "ITA", "sector_etf_at_rec": 238.77, "current_price": 50.36, "current_price_asof": "2026-07-14", "daily_opens": {"2026-07-13": 48.48}, "gain_loss_pct": 3.877887789, "vs_spy_pct": 3.962941013, "vs_sector_pct": 5.343733582, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-15", "ticker": "HBM", "company": "Hudbay Minerals Inc.", "news_overview": "China halted sulfuric-acid exports to Chile (fully cut off by May 2026), the key input for Chile's copper heap-leach operations, compounding a global sulfur bottleneck traced to the Iran war. Chile copper output fell 9.04% YoY in March 2026 (Codelco -10%, BHP Escondida -15.75%, Collahuasi -10.8%). Morgan Stanley forecasts a 600,000-tonne 2026 refined copper deficit -- the largest in 20+ years.", "pick_overview": "Mid-cap copper/gold/zinc miner (Peru, Manitoba, Arizona) with no material Chile heap-leach/sulfuric-acid exposure.", "rationale": "This is a chemical-input failure, not an ore-grade problem, so it disproportionately hits Chile-concentrated leach producers while sparing concentrate/flotation producers elsewhere. As the deficit widens, non-Chile supply gains relative pricing power. Second-order: not \"copper price up\" but \"a Chile-specific input-chain failure reallocates market share/margin to non-Chile producers.\"", "source_url": "https://www.mining.com/web/copper-king-chile-faces-acid-supply-crunch-as-china-exports-dry-up/", "confidence": "Med-High", "category": "supply-chain", "target_hold_period": "2-6 months", "exit_plan": "Trim 1/3 at +15%, 1/3 at +30%; exit remainder if Chinese sulfuric-acid exports to Chile resume, or -15% stop.", "price_at_rec": null, "spy_at_rec": null, "sector_etf": "COPX", "sector_etf_at_rec": null, "current_price": null, "current_price_asof": null, "daily_opens": {}, "gain_loss_pct": null, "vs_spy_pct": null, "vs_sector_pct": null, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-15", "ticker": "EE", "company": "Excelerate Energy, Inc.", "news_overview": "QatarEnergy invoked force majeure on LNG shipments; Iranian strikes damaged ~17% of Qatar's Ras Laffan export capacity with a 3-5 year repair timeline. Renewed strikes this week reignited transit fears; European gas prices jumped ~5% on Jul 13. Europe is racing to refill storage before winter, with the US now supplying 63% of EU LNG imports (up from 57%).", "pick_overview": "FSRU (floating storage regasification unit) operator expanding European LNG import/regas capacity (Germany-Wilhelmshaven, Italy-Ravenna; ~6 new/expanded EU terminals forecast for 2026).", "rationale": "Qatar's multi-year capacity loss plus persistent Hormuz risk means Europe must lock in MORE import/regas capacity to receive LNG from alternative sources -- an infrastructure bottleneck distinct from the tanker freight-rate story already used for crude (FRO). Excelerate's floating terminals deploy faster than fixed onshore plants, capturing the urgency premium.", "source_url": "https://ieefa.org/european-lng-tracker", "confidence": "Med-High", "category": "supply-chain", "target_hold_period": "2-5 months", "exit_plan": "Trim 1/3 at +18%, 1/3 at +35%; exit remainder on confirmed Ras Laffan capacity restoration, or -15% stop.", "price_at_rec": null, "spy_at_rec": null, "sector_etf": "XLE", "sector_etf_at_rec": null, "current_price": null, "current_price_asof": null, "daily_opens": {}, "gain_loss_pct": null, "vs_spy_pct": null, "vs_sector_pct": null, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-15", "ticker": "METC", "company": "Ramaco Resources, Inc.", "news_overview": "Brook Mine (Ranchester, WY) officially opened Jul 11 -- the first new US rare earth mine in 70+ years, DOE/NETL-backed, ~1.7M tons of rare earth oxides from unconventional coal-associated clay that avoids costly hard-rock processing. G7 leaders agreed to cut reliance on any single non-G7 rare-earth supplier below 60% by 2030; China broadened export controls on US/Japanese entities this month.", "pick_overview": "US metallurgical coal producer whose Brook Mine subsidiary is developing the newly-opened Wyoming rare-earth project.", "rationale": "G7 diversification targets and tightening Chinese controls create policy-level urgency and funding support for non-China rare-earth supply. Ramaco's unconventional, low-radioactivity clay deposit sidesteps the capital intensity that kills most hard-rock rare-earth projects -- differentiated from the already-crowded MP Materials/Lynas trade. CAVEAT (why only Medium, not High): core coal segment posted a Q1 2026 net loss and negative adjusted EBITDA, and the rare-earth project is still pilot/PEA-stage -- a longer-dated call option, not near-term revenue.", "source_url": "https://rareearthexchanges.com/news/brook-mine-to-become-first-new-u-s-rare-earth-project-in-70-years-wyoming-reclaims-strategic-spotlight/", "confidence": "Med", "category": "regulatory", "target_hold_period": "3-9 months", "exit_plan": "Trim 1/3 at +20%, 1/3 at +40%; exit remainder on DOE funding withdrawal/negative PEA update, or -18% stop (wider given coal-segment volatility).", "price_at_rec": null, "spy_at_rec": null, "sector_etf": "XME", "sector_etf_at_rec": null, "current_price": null, "current_price_asof": null, "daily_opens": {}, "gain_loss_pct": null, "vs_spy_pct": null, "vs_sector_pct": null, "thesis_outcome": "Open", "status": "open", "realized": []}, {"date_recommended": "2026-07-15", "ticker": "KRMN", "company": "Karman Holdings Inc.", "news_overview": "Pentagon aims to more than triple annual Patriot PAC-3 production (600 to 2,000/year); $9.0B Saudi Patriot sale and ~$5B Qatar Patriot/APKWS restock already approved; batteries redeployed from South Korea/Germany to the Middle East. This week's Iran strikes plus Houthi/Iran attacks on Jordan, Saudi Arabia and Kuwait underscore the demand driver.", "pick_overview": "Aerospace/defense subsystem supplier (payload protection/deployment, aerostructures, propulsion/interstage systems) for hypersonics, strategic missile defense and tactical missile programs -- not a named prime.", "rationale": "The Patriot/missile-defense surge is a manufacturing-capacity story as much as a demand story; the physical bottleneck runs through sub-tier structural/propulsion suppliers who fulfill the expanded build rate across MULTIPLE missile programs. Karman's active pipeline grew to ~$3B (from ~$1B a year ago) with revenue +51% YoY. NOTE: shares a sector (defense) with existing open pick KTOS -- different specific program driver (Patriot/missile-defense production ramp vs. NATO/European rearmament), flagged as a concentration risk.", "source_url": "https://www.stripes.com/theaters/us/2026-04-02/boeing-patriot-missile-production-21258911.html", "confidence": "Med-High", "category": "geopolitical", "target_hold_period": "2-6 months", "exit_plan": "Trim 1/3 at +20%, 1/3 at +40%; exit remainder on Patriot funding cut/CR stall, or -15% stop.", "price_at_rec": null, "spy_at_rec": null, "sector_etf": "ITA", "sector_etf_at_rec": null, "current_price": null, "current_price_asof": null, "daily_opens": {}, "gain_loss_pct": null, "vs_spy_pct": null, "vs_sector_pct": null, "thesis_outcome": "Open", "status": "open", "realized": []}], "kills": [{"date": "2026-07-13", "ticker": "XOM", "company": "ExxonMobil", "story": "Iran/Hormuz war and crude supply-shock risk.", "kill_stage": "first-order", "reason": "Obvious oil-price play; a supply shock benefits tankers (ton-mile expansion, war-risk surcharges) more directly than an integrated major, and any oil-price spike is partly capped/priced-in by spare capacity plus SPR releases. Chose FRO instead as the more direct second-order beneficiary.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-13", "ticker": "CCJ", "company": "Cameco Corp", "story": "Global nuclear buildout / reactor construction wave.", "kill_stage": "priced-in", "reason": "Crowded, richly-valued uranium-miner trade; the binding bottleneck in the nuclear buildout is enrichment capacity (Russia/Tenex-dominated), not mined uranium pounds. Chose LEU instead as the less-crowded enrichment play.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-13", "ticker": "LMT", "company": "Lockheed Martin", "story": "NATO Ankara summit rearmament commitments.", "kill_stage": "first-order", "reason": "Named prime contractor; backlog impact already reflected in consensus. Sub-tier suppliers of drones/munitions-enablers/propulsion offer higher second-order beta on broad Western rearmament. Chose KTOS instead.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-13", "ticker": "MU", "company": "Micron Technology", "story": "HBM/3D-stacking memory boom (SK Hynix debut, NVIDIA-SK Hynix partnership).", "kill_stage": "first-order", "reason": "Direct HBM beneficiary but carries memory-price cyclicality and single-product concentration risk. Advanced-packaging metrology (Camtek) captures HBM unit growth without that price exposure. Chose CAMT instead.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-13", "ticker": "GEV", "company": "GE Vernova", "story": "Record US power demand / AI data-center buildout.", "kill_stage": "priced-in", "reason": "Consensus turbine/AI-power long, already richly valued. Medium-voltage switchgear (Powell Industries) is a less-crowded bottleneck riding the same driver. Chose POWL instead.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-13", "ticker": "NTR", "company": "Nutrien Ltd", "story": "USDA crop report / fertilizer demand tightness.", "kill_stage": "first-order", "reason": "Broad fertilizer/potash beta lacks the specific US Henry Hub feedstock arbitrage that widens CF Industries' nitrogen margins against a global gas-price spike. Chose CF instead.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "GTLS", "company": "Chart Industries", "story": "LNG-Europe equipment demand -- same trigger considered for EE (Excelerate Energy).", "kill_stage": "unverifiable", "reason": "Being acquired by Baker Hughes ($13.6B deal, EU approval already secured); the stock is pinned to deal-arb spread, not free to trade the underlying thesis.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "ERII", "company": "Energy Recovery Inc", "story": "Western US drought driving desalination capex.", "kill_stage": "just-so-story", "reason": "Company just withdrew its FY26 desalination guidance explicitly because the Iran conflict is hurting its Middle East business -- the news is net negative for the stock, not a clean beneficiary of the story.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "CB", "company": "Chubb Limited", "story": "Leads new Lloyd's Hormuz war-risk insurance consortium and a $40B DFC facility.", "kill_stage": "just-so-story", "reason": "Real news, but marine war-risk premium income is a rounding error against a ~$110B diversified insurer -- immaterial to the stock.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "BE", "company": "Bloom Energy", "story": "Data-center behind-the-meter power demand (VA consumption tax, White House AI power-cost event).", "kill_stage": "priced-in", "reason": "Already booked $7.65B in data-center deals in the past 90 days plus a $25B Brookfield deal (5x upsized Jun 30). This is now the consensus AI-power name, not an overlooked second-order play.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "AVAV", "company": "AeroVironment", "story": "Gulf drone-attack proliferation (Kuwait, Jordan, Saudi Arabia) driving counter-drone demand.", "kill_stage": "priced-in", "reason": "The $500M Army contract was announced Jul 1-2, nearly two weeks before this sweep window -- already digested by the market.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "APD", "company": "Air Products and Chemicals", "story": "Qatar/China helium supply crisis threatening chip-fab (HBM/DRAM) production.", "kill_stage": "priced-in", "reason": "JPMorgan and Wells Fargo already issued upgrades citing this exposure; helium is a small slice of a ~$70B diversified industrial-gas major.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "LNN", "company": "Lindsay Corp", "story": "Western US drought driving irrigation-equipment capex.", "kill_stage": "just-so-story", "reason": "Management's own Q3 FY26 earnings call said the opposite -- irrigation demand is soft despite severe drought, because weak farm economics and high input costs dominate. Plausible story, contradicted by the company's own disclosure.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "NEHC", "company": "New Era Helium", "story": "Domestic helium supply diversification.", "kill_stage": "unverifiable", "reason": "Rebranded to New Era Energy & Digital (ticker NUAI) in Aug 2025, pivoting to AI/data-center infrastructure. No longer a clean helium proxy.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}, {"date": "2026-07-15", "ticker": "RDUS", "company": "Radius Recycling", "story": "Copper-scrap economics improving as the refined-copper deficit widens.", "kill_stage": "unverifiable", "reason": "Acquired by Toyota Tsusho America and delisted from Nasdaq in July 2025. Not tradable.", "price_at_kill": null, "current_price": null, "would_be_gain_loss_pct": null}]};
+  document.querySelectorAll('.lb-row').forEach(function(row) {
+    row.addEventListener('click', function() {
+      var existing = row.nextElementSibling;
+      if (existing && existing.classList.contains('opens-panel')) {
+        existing.remove();
+        return;
+      }
+      var opens = JSON.parse(row.getAttribute('data-opens') || '{}');
+      var keys = Object.keys(opens).sort();
+      var html = '<tr><td colspan="9"><div class="opens-panel" style="display:block;"><strong>Daily opens for ' + row.getAttribute('data-ticker') + ':</strong><br>' +
+        keys.map(function(k) { return k + ': $' + opens[k].toFixed(2); }).join(' &nbsp; ') +
+        (keys.length === 0 ? 'no data yet' : '') + '</div></td></tr>';
+      var tr = document.createElement('tr');
+      tr.innerHTML = html;
+      row.parentNode.insertBefore(tr, row.nextSibling);
+    });
+  });
+</script>

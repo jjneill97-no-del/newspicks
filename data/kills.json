@@ -1,0 +1,167 @@
+[
+  {
+    "date": "2026-07-13",
+    "ticker": "XOM",
+    "company": "ExxonMobil",
+    "story": "Iran/Hormuz war and crude supply-shock risk.",
+    "kill_stage": "first-order",
+    "reason": "Obvious oil-price play; a supply shock benefits tankers (ton-mile expansion, war-risk surcharges) more directly than an integrated major, and any oil-price spike is partly capped/priced-in by spare capacity plus SPR releases. Chose FRO instead as the more direct second-order beneficiary.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-13",
+    "ticker": "CCJ",
+    "company": "Cameco Corp",
+    "story": "Global nuclear buildout / reactor construction wave.",
+    "kill_stage": "priced-in",
+    "reason": "Crowded, richly-valued uranium-miner trade; the binding bottleneck in the nuclear buildout is enrichment capacity (Russia/Tenex-dominated), not mined uranium pounds. Chose LEU instead as the less-crowded enrichment play.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-13",
+    "ticker": "LMT",
+    "company": "Lockheed Martin",
+    "story": "NATO Ankara summit rearmament commitments.",
+    "kill_stage": "first-order",
+    "reason": "Named prime contractor; backlog impact already reflected in consensus. Sub-tier suppliers of drones/munitions-enablers/propulsion offer higher second-order beta on broad Western rearmament. Chose KTOS instead.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-13",
+    "ticker": "MU",
+    "company": "Micron Technology",
+    "story": "HBM/3D-stacking memory boom (SK Hynix debut, NVIDIA-SK Hynix partnership).",
+    "kill_stage": "first-order",
+    "reason": "Direct HBM beneficiary but carries memory-price cyclicality and single-product concentration risk. Advanced-packaging metrology (Camtek) captures HBM unit growth without that price exposure. Chose CAMT instead.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-13",
+    "ticker": "GEV",
+    "company": "GE Vernova",
+    "story": "Record US power demand / AI data-center buildout.",
+    "kill_stage": "priced-in",
+    "reason": "Consensus turbine/AI-power long, already richly valued. Medium-voltage switchgear (Powell Industries) is a less-crowded bottleneck riding the same driver. Chose POWL instead.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-13",
+    "ticker": "NTR",
+    "company": "Nutrien Ltd",
+    "story": "USDA crop report / fertilizer demand tightness.",
+    "kill_stage": "first-order",
+    "reason": "Broad fertilizer/potash beta lacks the specific US Henry Hub feedstock arbitrage that widens CF Industries' nitrogen margins against a global gas-price spike. Chose CF instead.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "GTLS",
+    "company": "Chart Industries",
+    "story": "LNG-Europe equipment demand -- same trigger considered for EE (Excelerate Energy).",
+    "kill_stage": "unverifiable",
+    "reason": "Being acquired by Baker Hughes ($13.6B deal, EU approval already secured); the stock is pinned to deal-arb spread, not free to trade the underlying thesis.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "ERII",
+    "company": "Energy Recovery Inc",
+    "story": "Western US drought driving desalination capex.",
+    "kill_stage": "just-so-story",
+    "reason": "Company just withdrew its FY26 desalination guidance explicitly because the Iran conflict is hurting its Middle East business -- the news is net negative for the stock, not a clean beneficiary of the story.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "CB",
+    "company": "Chubb Limited",
+    "story": "Leads new Lloyd's Hormuz war-risk insurance consortium and a $40B DFC facility.",
+    "kill_stage": "just-so-story",
+    "reason": "Real news, but marine war-risk premium income is a rounding error against a ~$110B diversified insurer -- immaterial to the stock.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "BE",
+    "company": "Bloom Energy",
+    "story": "Data-center behind-the-meter power demand (VA consumption tax, White House AI power-cost event).",
+    "kill_stage": "priced-in",
+    "reason": "Already booked $7.65B in data-center deals in the past 90 days plus a $25B Brookfield deal (5x upsized Jun 30). This is now the consensus AI-power name, not an overlooked second-order play.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "AVAV",
+    "company": "AeroVironment",
+    "story": "Gulf drone-attack proliferation (Kuwait, Jordan, Saudi Arabia) driving counter-drone demand.",
+    "kill_stage": "priced-in",
+    "reason": "The $500M Army contract was announced Jul 1-2, nearly two weeks before this sweep window -- already digested by the market.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "APD",
+    "company": "Air Products and Chemicals",
+    "story": "Qatar/China helium supply crisis threatening chip-fab (HBM/DRAM) production.",
+    "kill_stage": "priced-in",
+    "reason": "JPMorgan and Wells Fargo already issued upgrades citing this exposure; helium is a small slice of a ~$70B diversified industrial-gas major.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "LNN",
+    "company": "Lindsay Corp",
+    "story": "Western US drought driving irrigation-equipment capex.",
+    "kill_stage": "just-so-story",
+    "reason": "Management's own Q3 FY26 earnings call said the opposite -- irrigation demand is soft despite severe drought, because weak farm economics and high input costs dominate. Plausible story, contradicted by the company's own disclosure.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "NEHC",
+    "company": "New Era Helium",
+    "story": "Domestic helium supply diversification.",
+    "kill_stage": "unverifiable",
+    "reason": "Rebranded to New Era Energy & Digital (ticker NUAI) in Aug 2025, pivoting to AI/data-center infrastructure. No longer a clean helium proxy.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-15",
+    "ticker": "RDUS",
+    "company": "Radius Recycling",
+    "story": "Copper-scrap economics improving as the refined-copper deficit widens.",
+    "kill_stage": "unverifiable",
+    "reason": "Acquired by Toyota Tsusho America and delisted from Nasdaq in July 2025. Not tradable.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  }
+]
