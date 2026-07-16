@@ -163,5 +163,60 @@
     "price_at_kill": null,
     "current_price": null,
     "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-16",
+    "ticker": "CLF",
+    "company": "Cleveland-Cliffs Inc.",
+    "story": "US grid buildout/data-center demand has pushed grain-oriented electrical steel (GOES) demand and transformer lead times to record levels; Cleveland-Cliffs is the only North American GOES producer, just won a $400M/5-year electrical-steel military contract, and is bringing a new Weirton, WV transformer plant online (+30-40% GOES tonnage).",
+    "kill_stage": "priced-in",
+    "reason": "Real niche, but 'stainless and electrical' combined was just 3% of CLF's Q1 2026 product sales volume -- immaterial to a ~$20B diversified steel producer's overall earnings. The angle is also already circulating in analyst/finance commentary. Story-to-fundamentals ratio too high; no cleaner pure-play GOES/transformer-component beneficiary was found.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-16",
+    "ticker": "UNP",
+    "company": "Union Pacific Corporation",
+    "story": "Farmer/trucker 'mega-blockades' across Mexico (Ciudad Juarez-El Paso crossing stranding ~38,000 truckloads, ~$1.45B in unrealized exports) have periodically snarled cross-border truck freight, theoretically diverting volume to rail.",
+    "kill_stage": "just-so-story",
+    "reason": "Sources conflict on whether the blockades are still active as of mid-July (some report the nationwide strike ended in April after clashes with authorities) -- the catalyst's currency is unclear. Even if live, UNP/CPKC are diversified mega-cap railroads already running structural truck-to-rail conversion programs unrelated to this specific unrest; a short-lived disruption is immaterial to earnings, and 'railroads win when trucking is disrupted' is a reflexive association, not a sized causal chain.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-16",
+    "ticker": "STNG",
+    "company": "Scorpio Tankers Inc.",
+    "story": "Renewed Iran strikes and elevated Strait of Hormuz war-risk premiums (~5% of hull value) continue to support tanker economics.",
+    "kill_stage": "priced-in",
+    "reason": "Same Hormuz/tanker-rate driver already captured via the open FRO pick (2026-07-13); STNG/INSW are already being named in mainstream finance media (Benzinga: '3 shipping and insurance stocks to watch') as the obvious plays. Adding a second overlapping tanker name would concentrate the portfolio in an already-represented, already-publicized theme rather than diversify it.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-16",
+    "ticker": "TENB",
+    "company": "Tenable Holdings, Inc.",
+    "story": "Microsoft's July 2026 Patch Tuesday shipped a record 622 CVEs, including an actively-exploited SharePoint zero-day (CVE-2026-56164) that CISA gave federal agencies until July 17 to remediate.",
+    "kill_stage": "just-so-story",
+    "reason": "'Buy vulnerability-management vendors after a big Patch Tuesday' is a reflexive, recurring association (happens most months to some degree), not a distinct causal chain -- exactly the first-association trap the process is meant to screen out. Enterprise security-spend cycles are too diffuse and slow-moving to time off one disclosure event.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-16",
+    "ticker": "MP",
+    "company": "MP Materials Corp.",
+    "story": "IEA warned July 16 that full implementation of China's rare-earth export controls could put $6.5T of downstream Western production at risk; China added 10 more US entities, including rare-earth miners, to its own export-control list in June.",
+    "kill_stage": "priced-in",
+    "reason": "MP is the single most obvious, already-consensus rare-earth reshoring trade -- heavily covered for 2+ years and direct/first-order exposure (an actual rare-earth miner/processor) rather than second-order. The existing open pick METC (Ramaco Resources) already provides less-obvious exposure to the same G7 diversification tailwind via its Wyoming rare-earth project; today's IEA headline is logged as a reiteration for METC, not a new pick.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
   }
 ]

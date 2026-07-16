@@ -12,26 +12,26 @@ from datetime import datetime
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-LAST_RUN_ET = "2026-07-15 08:04 AM EDT"
+TODAY = "2026-07-16"
+LAST_RUN_ET = "2026-07-16 08:15 AM EDT"
 STATUS_OK = False
 STATUS_LINES = [
-    "Migration run (one-time): ported 6 open picks + 6 kills from the legacy \"Stock News Picks\" Google Sheet (dated 2026-07-13), "
-    "and recovered 4 additional picks + 9 additional kills (dated 2026-07-15) from a Gmail draft that never made it into the sheet "
-    "(the sheet's ODS write pipeline was broken). Drive is not touched again going forward -- git is now the single source of truth.",
-    "LIVE PRICE REFRESH FAILED THIS RUN: yfinance (Yahoo Finance backend), a direct stooq.com CSV pull, and WebFetch attempts against "
-    "Yahoo Finance / stooq / Google Finance quote pages all returned HTTP 403 at the network egress proxy -- confirmed via the proxy's "
-    "own status endpoint as a policy-level CONNECT rejection to finance-data hosts (fc.yahoo.com etc.), not a transient error. Five "
-    "independent attempts across two access paths were made; per the no-more-than-two-retries rule, further retries were not attempted.",
-    "Because of the above: the 6 migrated picks (FRO, CF, CAMT, LEU, POWL, KTOS) show current_price values carried over unchanged from "
-    "the legacy sheet's last live snapshot (dated 2026-07-14) -- real recorded data, not fabricated, but NOT refreshed today. The 4 new "
-    "picks (HBM, EE, METC, KRMN) and all 15 kills have no price data at all yet (price_at_rec / price_at_kill pending) since they were "
-    "never priced before this outage. No numbers were invented anywhere on this page.",
-    "Today's picks (dated 2026-07-15) already existed after migration, so per the no-double-slate rule no new picks were generated this run.",
-    "NEXT RUN MUST: backfill price_at_rec for HBM/EE/METC/KRMN, price_at_kill for all 15 kills, and refresh current_price for all open "
-    "picks, once the finance-data network block is resolved.",
-    "ACTION NEEDED (one-time, manual): this is the first push to a previously-empty repo, so GitHub Pages is not yet enabled and "
-    "https://jjneill97-no-del.github.io/newspicks/ may 404 until you enable it -- Settings -> Pages -> Deploy from branch -> master / (root). "
-    "No available tool in this session can toggle that setting.",
+    "LIVE PRICE REFRESH FAILED AGAIN THIS RUN (2nd consecutive failure, 2026-07-15 and 2026-07-16): yfinance, a direct stooq.com CSV pull, "
+    "and WebFetch against Yahoo Finance quote pages all returned HTTP 403 -- confirmed via the network proxy's own status endpoint as a "
+    "policy-level CONNECT rejection to finance-data hosts (fc.yahoo.com, stooq.com), not a transient error. This now looks like a persistent "
+    "environment network-policy block rather than a one-off outage, and likely needs a human to allow-list finance-data hosts for this session's "
+    "network policy before price tracking can resume. Per the no-more-than-two-retries rule, no further retries were attempted this run.",
+    "Because of the above: all current_price / price_at_rec / daily_opens values for existing open picks (FRO, CF, CAMT, LEU, POWL, KTOS, HBM, "
+    "EE, METC, KRMN) are carried over unchanged from the last successful/attempted snapshot -- real recorded data, not fabricated, but NOT "
+    "refreshed today. The 4 new picks below (DSGX, SGH, CVCO, REX) and all 5 new kills also have price_at_rec / price_at_kill pending. "
+    "New tickers were verified as real, currently-traded securities on major exchanges via web search (company filings, analyst coverage, "
+    "quoted share prices in secondary sources) since direct market-data lookup was unavailable -- no price numbers were invented anywhere on this page.",
+    "Today's picks are new (no picks dated 2026-07-16 existed yet), so a full sweep/scoring/kill-pass was run: ~30 stories screened across "
+    "regulatory, geopolitical, supply-chain, tech, commodities and consumer beats; 4 picks survived adversarial kill-pass (see Considered and "
+    "Rejected Today) alongside reiterations for FRO (continued Hormuz/Iran escalation) and METC (IEA's July 16 rare-earth supply warning).",
+    "NEXT RUN MUST: retry price refresh (yfinance/stooq/WebFetch) first thing; if still blocked, flag to the user directly that the network "
+    "policy needs a manual allow-list change, since this is now a repeated, not transient, failure. Backfill price_at_rec for all pending "
+    "tickers and price_at_kill for all pending kills once unblocked.",
 ]
 
 def load(name):
@@ -100,8 +100,8 @@ def esc(s):
         return ""
     return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
-today_picks = [p for p in picks if p["date_recommended"] == "2026-07-15"]
-today_kills = [k for k in kills if k["date"] == "2026-07-15"]
+today_picks = [p for p in picks if p["date_recommended"] == TODAY]
+today_kills = [k for k in kills if k["date"] == TODAY]
 
 status_html = "".join(f"<p>{esc(l)}</p>" for l in STATUS_LINES)
 
@@ -225,7 +225,7 @@ html = f"""<title>Second-Order News Stock Picks &mdash; Paper Trading Tracker</t
   {status_html}
 </div>
 
-<h2>Today's Picks &mdash; 2026-07-15</h2>
+<h2>Today's Picks &mdash; {esc(TODAY)}</h2>
 {''.join(pick_cards) if pick_cards else '<p>No new picks today (reiteration day or no qualifying stories).</p>'}
 
 <h2>Considered and Rejected Today</h2>
