@@ -12,26 +12,36 @@ from datetime import datetime
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TODAY = "2026-07-16"
-LAST_RUN_ET = "2026-07-16 08:15 AM EDT"
+TODAY = "2026-07-17"
+LAST_RUN_ET = "2026-07-17 07:50 AM EDT"
 STATUS_OK = False
 STATUS_LINES = [
-    "LIVE PRICE REFRESH FAILED AGAIN THIS RUN (2nd consecutive failure, 2026-07-15 and 2026-07-16): yfinance, a direct stooq.com CSV pull, "
-    "and WebFetch against Yahoo Finance quote pages all returned HTTP 403 -- confirmed via the network proxy's own status endpoint as a "
-    "policy-level CONNECT rejection to finance-data hosts (fc.yahoo.com, stooq.com), not a transient error. This now looks like a persistent "
-    "environment network-policy block rather than a one-off outage, and likely needs a human to allow-list finance-data hosts for this session's "
-    "network policy before price tracking can resume. Per the no-more-than-two-retries rule, no further retries were attempted this run.",
-    "Because of the above: all current_price / price_at_rec / daily_opens values for existing open picks (FRO, CF, CAMT, LEU, POWL, KTOS, HBM, "
-    "EE, METC, KRMN) are carried over unchanged from the last successful/attempted snapshot -- real recorded data, not fabricated, but NOT "
-    "refreshed today. The 4 new picks below (DSGX, SGH, CVCO, REX) and all 5 new kills also have price_at_rec / price_at_kill pending. "
-    "New tickers were verified as real, currently-traded securities on major exchanges via web search (company filings, analyst coverage, "
-    "quoted share prices in secondary sources) since direct market-data lookup was unavailable -- no price numbers were invented anywhere on this page.",
-    "Today's picks are new (no picks dated 2026-07-16 existed yet), so a full sweep/scoring/kill-pass was run: ~30 stories screened across "
-    "regulatory, geopolitical, supply-chain, tech, commodities and consumer beats; 4 picks survived adversarial kill-pass (see Considered and "
-    "Rejected Today) alongside reiterations for FRO (continued Hormuz/Iran escalation) and METC (IEA's July 16 rare-earth supply warning).",
-    "NEXT RUN MUST: retry price refresh (yfinance/stooq/WebFetch) first thing; if still blocked, flag to the user directly that the network "
-    "policy needs a manual allow-list change, since this is now a repeated, not transient, failure. Backfill price_at_rec for all pending "
-    "tickers and price_at_kill for all pending kills once unblocked.",
+    "LIVE PRICE REFRESH FAILED AGAIN THIS RUN -- 4th consecutive trading day (2026-07-15, 07-16, and now 07-17): yfinance and direct HTTPS "
+    "to every finance-data host (Yahoo Finance query1/query2/fc.yahoo.com, stooq.com, WSJ, Google Finance, marketwatch.com, even plain "
+    "www.google.com) all returned 403 CONNECT-tunnel rejections at the network-proxy level -- confirmed via the proxy's own status endpoint "
+    "as a policy-level block, not a transient outage. This is now unambiguously a persistent environment network-policy problem, not a "
+    "one-off. It needs a human to allow-list finance-data hosts for this session before automated price tracking can resume; a push "
+    "notification was sent flagging this.",
+    "As a fallback, prices were attempted via the WebSearch tool (which routes through separate infrastructure and isn't blocked). This "
+    "partially worked but proved unreliable enough to be dangerous: one figure returned for KRMN ($81.20, labeled 'high confidence' by the "
+    "search) was cross-checked and found to be a stale/mismatched snippet -- the real price was ~$47-49. Per the no-fabrication rule, EVERY "
+    "other WebSearch-sourced price from this run was discarded rather than risk silently publishing more bad numbers like that one. Only "
+    "KRMN's price_at_rec ($48.49, 2026-07-15 open) and current_price ($47.45, 2026-07-16 close) survived, because those two specific figures "
+    "were independently corroborated across two separate search passes. All other open picks (FRO, CF, CAMT, LEU, POWL, KTOS, HBM, EE, METC, "
+    "DSGX, SGH, CVCO, REX) keep their last successfully recorded prices, unchanged -- real data, just stale, not refreshed today. "
+    "daily_opens backfill remains fully blocked until direct market-data access is restored.",
+    "Today's picks are new (no picks dated 2026-07-17 existed yet), so a full sweep/scoring/kill-pass was run: ~25 stories screened across "
+    "regulatory, geopolitical, supply-chain, tech, commodities and consumer beats. Only 1 new pick survived adversarial kill-pass -- RYAM, "
+    "on the finalized Brazil Section 301 tariff stripping dissolving-pulp's exemption -- alongside 3 kills (CGNX and CENX as priced-in "
+    "AI-vision/Hormuz-hedge narratives already fully covered in financial press; ABAT on a going-concern/dilution viability fail) and reiteration "
+    "notes: FRO/LEU on today's OFAC Iran GL X1 wind-down deadline, and SGH on the accelerating DRAM/memory shortage. See Considered and "
+    "Rejected Today for full reasoning. A single new pick is a thinner day than usual by design -- most of today's obvious second-order "
+    "trades (nickel, alumina, AI-robotics vision) were already priced in or failed viability, and forcing a fuller slate would violate the "
+    "quality bar.",
+    "NEXT RUN MUST: retry direct price refresh (yfinance) first; if still blocked after 4+ consecutive days, this needs the user's manual "
+    "network-policy intervention rather than further automated retries. Backfill price_at_rec for RYAM and all still-pending tickers "
+    "(HBM, EE, METC, DSGX, SGH, CVCO, REX) once unblocked. Friday thesis-outcome review was skipped this run due to the price outage "
+    "consuming the run's research budget -- do it next run.",
 ]
 
 def load(name):

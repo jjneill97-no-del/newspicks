@@ -218,5 +218,38 @@
     "price_at_kill": null,
     "current_price": null,
     "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-17",
+    "ticker": "CGNX",
+    "company": "Cognex Corporation",
+    "story": "Nvidia unveiled Cosmos 3 Edge (robotics/physical-AI world model); Fujitsu, Hitachi and Kawasaki Heavy Industries announced a coalition to build open multimodal foundation models for robotics and physical-AI applications -- machine vision is the sensory layer for this build-out.",
+    "kill_stage": "priced-in",
+    "reason": "CGNX already trades at 77.7x P/E vs. an estimated fair multiple near 42.8x and a 31.2x industry average; Q1 2026 beat (revenue +24% YoY) already drove analyst upgrades and multiple 'is CGNX fully valued' pieces in the financial press. The specific Nvidia/Fujitsu/Hitachi/Kawasaki robotics-coalition news is incremental to an AI-vision optimism narrative that is already fully reflected in the stock, not a fresh, undiscovered catalyst.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-17",
+    "ticker": "CENX",
+    "company": "Century Aluminum Company",
+    "story": "Guinea implemented bauxite export curbs (~25% cut from 2026 baseline), tightening global alumina supply and raising costs for non-integrated smelters.",
+    "kill_stage": "priced-in",
+    "reason": "Financial press already explicitly frames CENX's stock surge as a 'Hormuz hedge' and covers its accelerated Mt. Holly, SC restart to fill the Middle-East-import vacuum -- this is a well-documented, already-consensus trade, not a second-order read investors haven't made yet. CENX's Jamalco JV also gives it Jamaica-sourced alumina largely insulated from the Guinea curb specifically, muddying the direct benefit.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-17",
+    "ticker": "ABAT",
+    "company": "American Battery Technology Company",
+    "story": "Nickel prices hit a three-week high as Indonesia holds mining quotas steady, tightening battery-metal supply -- considered as a beneficiary via battery-metal recycling (higher scrap-nickel recovery value).",
+    "kill_stage": "viability",
+    "reason": "Sub-one-year cash runway, sustained -$25-26M TTM operating/free cash flow, and heavy dilution history (ATM raises plus a new $46.25M shelf; shares outstanding up to 132.3M as of Q1 2026). Fails the going-concern/dilution screen regardless of thesis quality. No other financially healthy, US-major-exchange-listed pure-play nickel producer or recycler was found to substitute (Indonesian and diversified-major nickel exposure is immaterial/first-order for large-cap miners).",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
   }
 ]
