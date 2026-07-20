@@ -12,36 +12,33 @@ from datetime import datetime
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TODAY = "2026-07-17"
-LAST_RUN_ET = "2026-07-17 07:50 AM EDT"
+TODAY = "2026-07-20"
+LAST_RUN_ET = "2026-07-20 07:55 AM EDT"
 STATUS_OK = False
 STATUS_LINES = [
-    "LIVE PRICE REFRESH FAILED AGAIN THIS RUN -- 4th consecutive trading day (2026-07-15, 07-16, and now 07-17): yfinance and direct HTTPS "
-    "to every finance-data host (Yahoo Finance query1/query2/fc.yahoo.com, stooq.com, WSJ, Google Finance, marketwatch.com, even plain "
-    "www.google.com) all returned 403 CONNECT-tunnel rejections at the network-proxy level -- confirmed via the proxy's own status endpoint "
-    "as a policy-level block, not a transient outage. This is now unambiguously a persistent environment network-policy problem, not a "
-    "one-off. It needs a human to allow-list finance-data hosts for this session before automated price tracking can resume; a push "
-    "notification was sent flagging this.",
-    "As a fallback, prices were attempted via the WebSearch tool (which routes through separate infrastructure and isn't blocked). This "
-    "partially worked but proved unreliable enough to be dangerous: one figure returned for KRMN ($81.20, labeled 'high confidence' by the "
-    "search) was cross-checked and found to be a stale/mismatched snippet -- the real price was ~$47-49. Per the no-fabrication rule, EVERY "
-    "other WebSearch-sourced price from this run was discarded rather than risk silently publishing more bad numbers like that one. Only "
-    "KRMN's price_at_rec ($48.49, 2026-07-15 open) and current_price ($47.45, 2026-07-16 close) survived, because those two specific figures "
-    "were independently corroborated across two separate search passes. All other open picks (FRO, CF, CAMT, LEU, POWL, KTOS, HBM, EE, METC, "
-    "DSGX, SGH, CVCO, REX) keep their last successfully recorded prices, unchanged -- real data, just stale, not refreshed today. "
-    "daily_opens backfill remains fully blocked until direct market-data access is restored.",
-    "Today's picks are new (no picks dated 2026-07-17 existed yet), so a full sweep/scoring/kill-pass was run: ~25 stories screened across "
-    "regulatory, geopolitical, supply-chain, tech, commodities and consumer beats. Only 1 new pick survived adversarial kill-pass -- RYAM, "
-    "on the finalized Brazil Section 301 tariff stripping dissolving-pulp's exemption -- alongside 3 kills (CGNX and CENX as priced-in "
-    "AI-vision/Hormuz-hedge narratives already fully covered in financial press; ABAT on a going-concern/dilution viability fail) and reiteration "
-    "notes: FRO/LEU on today's OFAC Iran GL X1 wind-down deadline, and SGH on the accelerating DRAM/memory shortage. See Considered and "
-    "Rejected Today for full reasoning. A single new pick is a thinner day than usual by design -- most of today's obvious second-order "
-    "trades (nickel, alumina, AI-robotics vision) were already priced in or failed viability, and forcing a fuller slate would violate the "
-    "quality bar.",
-    "NEXT RUN MUST: retry direct price refresh (yfinance) first; if still blocked after 4+ consecutive days, this needs the user's manual "
-    "network-policy intervention rather than further automated retries. Backfill price_at_rec for RYAM and all still-pending tickers "
-    "(HBM, EE, METC, DSGX, SGH, CVCO, REX) once unblocked. Friday thesis-outcome review was skipped this run due to the price outage "
-    "consuming the run's research budget -- do it next run.",
+    "LIVE PRICE REFRESH FAILED AGAIN THIS RUN -- 4th consecutive trading day this has happened (2026-07-15, 07-16, 07-17, and now 07-20): "
+    "yfinance and direct HTTPS to every finance-data host (fc.yahoo.com, query1/query2.finance.yahoo.com, stooq.com, www.wsj.com) again "
+    "returned 403 CONNECT-tunnel rejections at the network-proxy level, confirmed via the proxy's own status endpoint "
+    "(recentRelayFailures: connect_rejected / 'gateway answered 403 to CONNECT') as a policy-level block, not a transient outage. This is "
+    "unambiguously a persistent environment network-policy problem spanning multiple runs and now a full trading week -- it needs a human "
+    "to allow-list finance-data hosts before automated price tracking can resume. A push notification was sent flagging this again today. "
+    "Per the no-fabrication rule and the lesson from the 2026-07-17 run (a WebSearch-sourced price for KRMN was later found to be a stale/ "
+    "mismatched snippet), NO prices were pulled via WebSearch this run either -- every open pick (FRO, CF, CAMT, LEU, POWL, KTOS, HBM, EE, "
+    "METC, DSGX, SGH, CVCO, REX, RYAM) keeps its last successfully recorded price, unchanged and stale, not refreshed today. daily_opens "
+    "backfill and price_at_rec backfill remain fully blocked until direct market-data access is restored.",
+    "Today's picks are new (no picks dated 2026-07-20 existed yet), so a full sweep/scoring/kill-pass was run: roughly 30 stories screened "
+    "across tariffs/regulatory (Section 122 expiring July 24, Section 301 16-country/60-country conclusions due today), geopolitical "
+    "(Iran war 9th night of strikes, Hormuz traffic), trucking/freight capacity, inland-waterway drought/flooding, pharma reshoring, "
+    "independent-refiner crack spreads, space launch policy, and biotech M&A. Only 1 new pick survived adversarial kill-pass -- KEX (Kirby "
+    "Corporation) on a worsening, fresh dual-basin Rhine + Mississippi inland-waterway capacity crisis -- alongside 9 kills, mostly for "
+    "being already fully priced-in/analyst-covered (RGEN, WST, PBF, DK, DINO), contradicted by the company's own disclosure (Ryder), "
+    "gated on a future event with no near-term revenue mechanism (RKLB), stale (WNC), or already-reacted/weak hold-period fit (NEXT). See "
+    "Considered and Rejected Today for full reasoning. A single new pick is a thinner day than usual by design -- most of the obvious "
+    "second-order trades from this week's news were already consensus, and forcing a fuller slate would violate the quality bar.",
+    "NEXT RUN MUST: retry direct price refresh (yfinance) first; this is now the 4th straight blocked attempt across a full trading week, "
+    "so if still blocked, escalate rather than keep silently retrying -- this needs the user's manual network-policy intervention. Backfill "
+    "price_at_rec for KEX and all still-pending tickers (HBM, EE, METC, DSGX, SGH, CVCO, REX, RYAM, KEX) once unblocked. Friday "
+    "thesis-outcome review is still owed from 2026-07-17 (skipped that run for the same reason) -- do it as soon as prices are back.",
 ]
 
 def load(name):

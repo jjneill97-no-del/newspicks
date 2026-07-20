@@ -251,5 +251,104 @@
     "price_at_kill": null,
     "current_price": null,
     "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "RGEN",
+    "company": "Repligen Corporation",
+    "story": "J&J's $55B pharma-manufacturing reshoring investment and the broader $480B/13-company industry reshoring pledge tied to Section 232 pharmaceutical tariffs (100% default rate, deadlines July 31/Sept 29).",
+    "kill_stage": "priced-in",
+    "reason": "UBS has already explicitly tagged Repligen as 'the bioprocessing leader for 2026' citing this exact reshoring tailwind, raised its price target to $200, and Q1 2026 results (order growth +20%, revenue +15% YoY) already reflect the trend. This is a consensus sell-side thesis, not an overlooked second-order read.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "WST",
+    "company": "West Pharmaceutical Services",
+    "story": "Same pharma-reshoring/sterile-injectable tariff wave (West supplies vial-stopper/syringe components for injectable fill-finish).",
+    "kill_stage": "priced-in",
+    "reason": "Stock already up 32.9% YTD vs. S&P's 28.2%, with 21 analysts having lifted price targets and multiple 'reasons to buy' Zacks/TradingView pieces already circulating. Fully reflected in the share price already.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "RKLB",
+    "company": "Rocket Lab Corporation",
+    "story": "Space Force raised the NSSL Phase 3 Lane 1 contract ceiling from $5.6B to $17B (July 17 notice), expanding the pre-approved launch-provider pool to seven companies including Rocket Lab.",
+    "kill_stage": "just-so-story",
+    "reason": "Rocket Lab cannot win any individual task order under this vehicle until Neutron completes a successful first flight (targeted Q4 2026) -- there is no near-term revenue mechanism. The stock actually fell >12% on July 16 (down 55% from its 2026 peak) amid broader negative space-sector sentiment, muddying any clean causal read that this specific news is bullish right now.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "PBF",
+    "company": "PBF Energy",
+    "story": "Diesel >$5/gal national average, gasoline inventories at a 14-year seasonal low, and refiners maximizing distillate output -- 3-2-1 crack spread near $69 vs ~$20 at the start of 2026.",
+    "kill_stage": "priced-in",
+    "reason": "Stock already up ~125% YTD; Motley Fool has explicitly written it up as 'a great way to hedge geopolitical conflict'; Zacks 60-day EPS estimate revisions already up 33%. Textbook already-consensus, already-publicized trade.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "DK",
+    "company": "Delek US Holdings",
+    "story": "Same refining crack-spread widening story as PBF.",
+    "kill_stage": "priced-in",
+    "reason": "Zacks 60-day EPS estimate revisions already up 40%; Q1 adjusted EBITDA already jumped from $33.6M to $211.7M year over year on the same crack-spread dynamic, and sell-side coverage already frames DK/PBF as the pure-play crack-spread pair trade.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "DINO",
+    "company": "HF Sinclair Corporation",
+    "story": "Same refining crack-spread story (third independent refiner considered).",
+    "kill_stage": "priced-in",
+    "reason": "Stock up more than 80% YTD; Morgan Stanley, Goldman Sachs and UBS have all raised price targets within days of each other and Evercore just initiated coverage; a 24/7 Wall St piece is literally titled explaining why refiners 'are on fire' off this exact crack-spread number. Maximally crowded already.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "R",
+    "company": "Ryder System",
+    "story": "Truckload spot rates hit an all-time record ($3.83/mile) and tender rejections climbed to 17.55%, theoretically driving carriers/shippers to Ryder's flexible rental/leasing fleet instead of committing capex to owned equipment.",
+    "kill_stage": "just-so-story",
+    "reason": "Ryder's own incoming CEO said the company has 'yet to see meaningful near-term change' in the freight market, calling this the longest rate recession in industry memory -- the company's own disclosure contradicts the plausible-sounding capacity-crunch beneficiary story, the same pattern that killed LNN on drought/irrigation in a prior run.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "WNC",
+    "company": "Wabash National Corporation",
+    "story": "Record truckload spot rates and tight capacity as a potential trigger for a trailer-order upcycle.",
+    "kill_stage": "unverifiable",
+    "reason": "The only supporting data (backlog +19% QoQ to $837M) is from the Q1 2026 earnings release in April/May, not fresh news from the last ~24-48h; management itself guides to a market rebound only in 'late 2026 and 2027' and reported a Q1 shipment decline of 14.5% YoY. No genuinely new catalyst this window.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
+  },
+  {
+    "date": "2026-07-20",
+    "ticker": "NEXT",
+    "company": "NextDecade Corporation",
+    "story": "Qatar's multi-year LNG export-capacity loss and Europe's LNG scramble (same driver as the open EE pick) considered for a Gulf Coast LNG export developer.",
+    "kill_stage": "priced-in",
+    "reason": "Stock already moved on July 13 explicitly framed as 'avoided the Hormuz shipping crisis'; Goldman Sachs initiated coverage July 15 at Neutral (not bullish); first LNG production isn't expected until H1 2027, well outside a typical hold period, and the company is pre-revenue on the relevant asset -- weak fit versus the viability/timeliness bar.",
+    "price_at_kill": null,
+    "current_price": null,
+    "would_be_gain_loss_pct": null
   }
 ]

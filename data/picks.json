@@ -400,5 +400,31 @@
     "thesis_outcome": "Open",
     "status": "open",
     "realized": []
+  },
+  {
+    "date_recommended": "2026-07-20",
+    "ticker": "KEX",
+    "company": "Kirby Corporation",
+    "news_overview": "A simultaneous, worsening dual-basin inland-waterway crisis broke this week: the Rhine at the Kaub gauge breached the critical ~77cm low-water threshold (barges sailing only ~20% loaded; Rotterdam-Karlsruhe tanker freight jumped from ~EUR45 to EUR60-70/tonne), while the Mississippi River Basin logged its driest Jan-May in 132 years, compounded by flash flooding in the Ohio/Tennessee valleys (Black River record 28ft crest) that has cut Southbound Mississippi grain-barge tonnage 79% in just over a month (corn -72%, soybeans -89%, wheat -55%). Rail, the usual backup mode, is independently facing cancellations/capacity shortfalls, so no substitute mode is absorbing the diverted volume.",
+    "pick_overview": "Largest US inland/coastal tank-barge operator (petrochemicals, refined products, black oil, agricultural chemicals) on the Mississippi River system and Gulf Intracoastal Waterway.",
+    "rationale": "This is a second-order physical-capacity-destruction story, not a commodity-price story: when river depths fall, barges must run partially loaded, so the same fleet delivers materially less tonnage per trip, shrinking effective supply even though nothing has happened to demand. Because rail (the usual pressure-relief valve) is itself constrained this month, there is no offsetting mode capping barge pricing power. Kirby is the direct, largest-scale way to be long that capacity destruction. CAVEAT (why Med, not High): Kirby already carries a Strong-Buy analyst consensus and a BofA price-target raise dating to its May 22 Q1 print, when conditions were already tight (low-90s% utilization) -- so this is partly an acceleration/reiteration of a known bull case rather than a fresh discovery. The stock is still ~8% off its 52-week high and had not yet re-rated on this month's incremental deterioration (79% grain-tonnage collapse, Rhine threshold breach) as of last check; Q2 earnings on July 29 is a live near-term catalyst that will show whether the acute July deterioration shows up in spot-pricing/utilization commentary.",
+    "source_url": "https://www.fb.org/market-intel/low-mississippi-river-levels-again-jeopardize-farm-income",
+    "confidence": "Med",
+    "category": "supply-chain",
+    "target_hold_period": "2-4 months (through Q2 earnings July 29 and into peak barge season)",
+    "exit_plan": "Trim 1/3 at +15%, 1/3 at +30%; exit remainder on confirmed river-level recovery/sustained rainfall restoring normal drafts, or -15% stop.",
+    "price_at_rec": null,
+    "spy_at_rec": null,
+    "sector_etf": "IYT",
+    "sector_etf_at_rec": null,
+    "current_price": null,
+    "current_price_asof": null,
+    "daily_opens": {},
+    "gain_loss_pct": null,
+    "vs_spy_pct": null,
+    "vs_sector_pct": null,
+    "thesis_outcome": "Open",
+    "status": "open",
+    "realized": []
   }
 ]
